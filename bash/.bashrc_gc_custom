@@ -1,0 +1,232 @@
+
+#------------------------------------------------------------------------------
+# Welcome Message.
+#------------------------------------------------------------------------------
+cat ~/.console_welcome.art
+
+
+#------------------------------------------------------------------------------
+# Bash shopts.
+#------------------------------------------------------------------------------
+shopt -s extglob
+shopt -s progcomp
+shopt -s histappend
+shopt -s histreedit
+shopt -s histverify
+shopt -s cmdhist
+shopt -s lithist
+shopt -s no_empty_cmd_completion
+shopt -s checkhash
+shopt -s hostcomplete
+shopt -s checkwinsize
+
+
+#------------------------------------------------------------------------------
+# Returncode.
+#------------------------------------------------------------------------------
+function returncode
+{
+  returncode=$?
+  if [ $returncode != 0 ]; then
+    echo "[$returncode]"
+  else
+    echo ""
+  fi
+}
+
+
+#------------------------------------------------------------------------------
+# Path.
+#------------------------------------------------------------------------------
+PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH
+
+
+#------------------------------------------------------------------------------
+# Prompt.
+#------------------------------------------------------------------------------
+if [ "$BASH" ]; then
+  if [ "`id -u`" -eq 0 ]; then
+    # The root prompt is red.
+    PS1='\[\033[0;31m\]\u@\h:\w #\[\033[0;37m\] '
+  else
+    PS1='\[\033[0;34m\]$(returncode)\[\033[0;32m\]\[\033[0;32m\]\u@\h\[\033[0;37m\]:\[\033[0;34m\]\w\[\033[0;31m\]$(parse_git_branch) \[\033[0;37m\]# '
+  fi
+else
+  if [ "`id -u`" -eq 0 ]; then
+    PS1='# '
+  else
+    PS1='$ '
+  fi
+fi
+
+export PS1
+
+# Whenever displaying the prompt, write the previous line to .bash_history.
+PROMPT_COMMAND='history -a'
+
+
+#------------------------------------------------------------------------------
+# Bash options.
+#------------------------------------------------------------------------------
+set -o notify
+
+
+#------------------------------------------------------------------------------
+# Completion.
+#------------------------------------------------------------------------------
+complete -A alias         alias unalias
+complete -A command       which
+complete -A export        export printenv
+complete -A hostname      ssh telnet ftp ncftp ping dig nmap
+complete -A helptopic     help
+complete -A job -P '%'    fg jobs
+complete -A setopt        set
+complete -A shopt         shopt
+complete -A signal        kill killall
+complete -A user          su userdel passwd
+complete -A group         groupdel groupmod newgrp
+complete -A directory     cd rmdir
+
+
+#------------------------------------------------------------------------------
+# Git options.
+#------------------------------------------------------------------------------
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+}
+
+
+#------------------------------------------------------------------------------
+# Colorized ls.
+#------------------------------------------------------------------------------
+export LS_OPTIONS='--color=auto'
+alias ls='ls $LS_OPTIONS'
+
+
+#------------------------------------------------------------------------------
+# Typos.
+#------------------------------------------------------------------------------
+alias scsl=clear
+alias qcls=clear
+alias clls=clear
+alias csl=clear
+alias cll=clear
+alias slc=clear
+alias lcs=clear
+alias lsc=clear
+alias sls=clear
+alias scl=clear
+alias cs=clear
+alias c=clear
+alias cl=clear
+alias ssl=clear
+alias csll=clear
+alias clsl=clear
+alias chmdo=chmod
+alias sl=ls
+alias sll=ls
+alias lsl=ls
+alias s=ls
+alias psa='ps a'
+alias tarx='tar x'
+alias maek=make
+alias act=cat
+alias cart=cat
+alias grpe=grep
+alias gpre=grep
+alias whcih=which
+alias icfonfig=ifconfig
+alias ifocnfig=ifconfig
+alias iv=vi
+alias lvi=vi
+alias vf=cd
+alias vp=cp
+alias nmv=mv
+alias mann=man
+alias nman=man
+alias nmann=man
+alias mb=mv
+
+
+#------------------------------------------------------------------------------
+# Miscellaneous.
+#------------------------------------------------------------------------------
+ulimit -c unlimited        # No limits.
+
+
+#------------------------------------------------------------------------------
+# Environment Variables.
+#------------------------------------------------------------------------------
+export EDITOR=vim
+export NNTPSERVER=localhost
+export HISTSIZE=2000
+export HISTFILESIZE=100000
+export HISTIGNORE=
+export MESA_GLX_FX=fullscreen
+export CVS_RSH=ssh
+export PAGER=less
+export LESS=i
+
+
+#------------------------------------------------------------------------------
+# Terminal settings.
+#------------------------------------------------------------------------------
+if ! [ $TERM ] ; then
+  eval `tset -s -Q`
+  case $TERM in
+    con*|vt100|linux|xterm)
+      tset -Q -e ^?
+    ;;
+  esac
+fi
+
+
+#------------------------------------------------------------------------------
+# Useful aliases to save some typing.
+#------------------------------------------------------------------------------
+alias cls='clear'
+alias l='ls -lA'
+alias ll='ls -lah'
+alias lsr='ls -lSr'
+alias md='mkdir'
+alias rd='rmdir'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+
+#------------------------------------------------------------------------------
+# Import local/private settings.
+#------------------------------------------------------------------------------
+if [ -f ~/.bashrc.local ]; then
+  . ~/.bashrc.local
+fi
+
+
+#------------------------------------------------------------------------------
+# User-dependent Settings.
+#------------------------------------------------------------------------------
+umask 022
+
+
+#------------------------------------------------------------------------------
+# RVM.
+#------------------------------------------------------------------------------
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+
+#------------------------------------------------------------------------------
+# Auto Complete
+#------------------------------------------------------------------------------
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
