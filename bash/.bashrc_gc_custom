@@ -38,7 +38,7 @@ function returncode
 #------------------------------------------------------------------------------
 # Path.
 #------------------------------------------------------------------------------
-PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/sbin:$PATH"
 export PATH
 
 
