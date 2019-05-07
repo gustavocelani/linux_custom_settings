@@ -50,7 +50,7 @@ if [ "$BASH" ]; then
     # The root prompt is red.
     PS1='\[\033[0;31m\]\u@\h:\w #\[\033[0;37m\] '
   else
-    PS1='\[\033[0;34m\]$(returncode)\[\033[0;32m\]\[\033[0;32m\]\u@\h\[\033[0;37m\]:\[\033[0;34m\]\w\[\033[0;31m\]$(parse_git_branch) \[\033[0;37m\]# '
+    PS1='\[\033[0;34m\]$(returncode)\[\033[01;32m\]\[\033[01;32m\]\u@\h\[\033[0;37m\]:\[\033[0;34m\]\w\[\033[0;31m\]$(parse_git_branch) \[\033[0;37m\]# '
   fi
 else
   if [ "`id -u`" -eq 0 ]; then
