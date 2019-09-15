@@ -30,9 +30,11 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-"*****************************************************************************
-"" NeoBundle install packages
-"*****************************************************************************
+" Color packages
+NeoBundle 'morhetz/gruvbox'
+NeoBundle 'tomasr/molokai'
+
+" Custom packages
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs.git'
 NeoBundle 'tpope/vim-commentary'
@@ -48,48 +50,8 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
 
-"" Vim-Session
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-session'
-
-if v:version >= 703
-  NeoBundle 'Shougo/vimshell.vim'
-endif
-
-if v:version >= 704
-  NeoBundle 'FelikZ/ctrlp-py-matcher'
-endif
-
-"" Color
-" NeoBundle 'tomasr/molokai'
-NeoBundle 'altercation/vim-colors-solarized'
-
-"" Vim-Bootstrap Updater
-NeoBundle 'sherzberg/vim-bootstrap-updater'
-
-"" Python Bundle
-NeoBundle "davidhalter/jedi-vim"
-NeoBundle "Yggdroot/indentLine"
-
-NeoBundle 'vim-scripts/c.vim'
-
-"" Javascript Bundle
-NeoBundle 'jelera/vim-javascript-syntax'
-
-"" Include user's extra bundle
-if filereadable(expand("~/.vimrc.local.bundles"))
-  source ~/.vimrc.local.bundles
-endif
-
+" End Neobundle
 call neobundle#end()
 
 " Required:
@@ -163,7 +125,7 @@ set foldlevel=20
 let no_buffers_menu=1
 if !exists('g:not_finsh_neobundle')
   set background=dark
-  colorscheme delek
+  colorscheme gruvbox
 endif
 
 set mousemodel=popup
@@ -179,20 +141,6 @@ if has("gui_running")
   endif
 else
   let g:CSApprox_loaded = 1
-
-
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
-  endif
-
-endif
-
-if &term =~ '256color'
-  set t_ut=
 endif
 
 "" Disable the blinking cursor.
@@ -259,13 +207,6 @@ let Grep_Skip_Dirs = '.git node_modules'
 " vimshell.vim
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_prompt =  '$ '
-
-" terminal emulation
-if g:vim_bootstrap_editor == 'nvim'
-  nnoremap <silent> <leader>sh :terminal<CR>
-else
-  nnoremap <silent> <leader>sh :VimShellCreate<CR>
-endif
 
 "*****************************************************************************
 "" Functions
@@ -359,6 +300,12 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore '+ g:ctrlp_custom_ignore +' -g ""'
 endif
+
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
 
 " syntastic
 let g:syntastic_always_populate_loc_list=1
@@ -504,4 +451,3 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
-
