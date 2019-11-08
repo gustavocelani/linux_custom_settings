@@ -2,7 +2,7 @@
 #------------------------------------------------------------------------------
 # Welcome Message.
 #------------------------------------------------------------------------------
-cat ~/.console_welcome.art
+# cat ~/.console_welcome.art
 
 
 #------------------------------------------------------------------------------
@@ -26,12 +26,27 @@ shopt -s checkwinsize
 #------------------------------------------------------------------------------
 function returncode
 {
-  returncode=$?
-  if [ $returncode != 0 ]; then
-    echo "[$returncode]"
-  else
-    echo ""
-  fi
+	returncode=$?
+	if [ $returncode != 0 ];
+	then
+		echo "[$returncode]"
+	else
+		echo ""
+	fi
+}
+
+
+#------------------------------------------------------------------------------
+# Git options.
+#------------------------------------------------------------------------------
+function parse_git_dirty
+{
+	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
+function parse_git_branch
+{
+	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 
 
@@ -43,21 +58,35 @@ export PATH
 
 
 #------------------------------------------------------------------------------
+# Android Environment.
+#------------------------------------------------------------------------------
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+
+#------------------------------------------------------------------------------
 # Prompt.
 #------------------------------------------------------------------------------
 if [ "$BASH" ]; then
-  if [ "`id -u`" -eq 0 ]; then
-    # The root prompt is red.
-    PS1='\[\033[0;31m\]\u@\h:\w #\[\033[0;37m\] '
-  else
-    PS1='\[\033[0;34m\]$(returncode)\[\033[01;32m\]\[\033[01;32m\]\u@\h\[\033[0;37m\]:\[\033[0;34m\]\w\[\033[0;31m\]$(parse_git_branch) \[\033[0;37m\]# '
-  fi
+
+	# Main PS1 for bash
+	PS1="\[\033[0;31m\]\342\224\214\342\224\200\$(returncode)[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;32m\]root\[\033[01;32m\]@\[\033[01;32m\]\h'; else echo '\[\033[01;32m\]\u\[\033[01;32m\]@\[\033[01;32m\]\h'; fi)\[\033[0;31m\]]\342\224\200\$(parse_git_branch)\342\224\200[\[\033[0;37m\]\w\[\033[0;31m\]]\n\[\033[0;31m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]\[\e[0;37m\] "
+
+	if [ "`id -u`" -eq 0 ];
+	then
+		PS1=${PS1}"\\#\[\e[0m\] "
+	else
+		PS1=${PS1}"\\$\[\e[0m\] "
+	fi
+
 else
-  if [ "`id -u`" -eq 0 ]; then
-    PS1='# '
-  else
-    PS1='$ '
-  fi
+	if [ "`id -u`" -eq 0 ];
+	then
+		PS1='# '
+	else
+		PS1='$ '
+	fi
 fi
 
 export PS1
@@ -87,17 +116,6 @@ complete -A signal        kill killall
 complete -A user          su userdel passwd
 complete -A group         groupdel groupmod newgrp
 complete -A directory     cd rmdir
-
-
-#------------------------------------------------------------------------------
-# Git options.
-#------------------------------------------------------------------------------
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-}
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
-}
 
 
 #------------------------------------------------------------------------------
@@ -155,7 +173,7 @@ alias mb=mv
 #------------------------------------------------------------------------------
 # Miscellaneous.
 #------------------------------------------------------------------------------
-ulimit -c unlimited        # No limits.
+ulimit -c unlimited # No limits.
 
 
 #------------------------------------------------------------------------------
@@ -168,18 +186,21 @@ export HISTFILESIZE=100000
 export HISTIGNORE=
 export MESA_GLX_FX=fullscreen
 export CVS_RSH=ssh
+export PAGER=less
+export LESS=iR
 
 
 #------------------------------------------------------------------------------
 # Terminal settings.
 #------------------------------------------------------------------------------
-if ! [ $TERM ] ; then
-  eval `tset -s -Q`
-  case $TERM in
-    con*|vt100|linux|xterm)
-      tset -Q -e ^?
-    ;;
-  esac
+if ! [ $TERM ];
+then
+	eval `tset -s -Q`
+	case $TERM in
+		con*|vt100|linux|xterm)
+			tset -Q -e ^?
+		;;
+	esac
 fi
 
 
@@ -200,8 +221,9 @@ alias ...='cd ../..'
 #------------------------------------------------------------------------------
 # Import local/private settings.
 #------------------------------------------------------------------------------
-if [ -f ~/.bashrc.local ]; then
-  . ~/.bashrc.local
+if [ -f ~/.bashrc.local ];
+then
+	. ~/.bashrc.local
 fi
 
 
@@ -221,11 +243,11 @@ umask 022
 # Auto Complete
 #------------------------------------------------------------------------------
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
 fi
 
 #------------------------------------------------------------------------------
