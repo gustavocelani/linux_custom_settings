@@ -75,7 +75,7 @@ if [ "$BASH" ]; then
 
 	if [ "`id -u`" -eq 0 ];
 	then
-		PS1=${PS1}"\\#\[\e[0m\] "
+		PS1=${PS1}"#\[\e[0m\] "
 	else
 		PS1=${PS1}"\\$\[\e[0m\] "
 	fi
