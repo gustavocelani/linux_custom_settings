@@ -19,3 +19,15 @@ System-wide software often uses configuration files stored in `/etc`, while user
 
 Some configuration files run a set of commands upon startup. A common convention is for such files to have "**rc**" in their name, typically using the name of the program then an "**(.)rc**" suffix e.g. `.xinitrc`, `.vimrc`, `.bashrc`, `xsane.rc`.
 
+
+## Automatic Configuration Usage
+
+```
+$ git clone https://github.com/gustavocelani/linux_custom_configuration_files.git
+$ cd ./linux_configuration_files
+$ chmod +x auto_config.sh
+$ ./auto_config.sh
+```
+
+![Alt text](auto_config_usage.png?raw=true "Automatic Configuration Usage")
+
