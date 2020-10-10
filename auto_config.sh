@@ -9,6 +9,7 @@
 #                  - Dist-Upgrade
 #                  - Keyboard
 #                  - Terminator
+#                  - Git
 #                  - Bash
 #                  - Vim
 #
@@ -151,13 +152,13 @@ clear
 
 SETUP_LIST=$( dialog \
 		--stdout \
-	        --separate-output \
+		--separate-output \
 		--backtitle "Powered by Gustavo Celani ( github.com/gustavocelani )" \
 		--title "GC Custom Linux Configuration Setup" \
 		--clear \
 		--ok-label "OK" \
 		--cancel-label "Exit" \
-	        --checklist "Choose what setup should be done" \
+		--checklist "" \
 	0 0 0 \
 	_Upgrade_      "OS Packages Upgrade"                   OFF \
 	_Dist_Upgrade_ "OS Distribution Upgrade"               OFF \
