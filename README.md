@@ -1,5 +1,5 @@
 
-# Linux Custom Configurations Files
+# Linux Custom Settings
 
 That repository contains some custom linux configuration files.
 

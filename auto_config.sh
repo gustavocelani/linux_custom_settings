@@ -119,6 +119,7 @@ _Bash_() {
 
 	echo -e "\nAttempt to replace .bashrc"
 	cp -v ./bash/.bashrc_gc_custom ~/.bashrc
+	cp -v ./bash/.gc_welcome_bash.sh ~/
 }
 
 _Vim_() {
