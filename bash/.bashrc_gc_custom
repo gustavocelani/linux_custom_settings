@@ -71,7 +71,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 if [ "$BASH" ]; then
 
 	# Main PS1 for bash
-	PS1="\[\033[0;31m\]\342\224\214\342\224\200\$(returncode)[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;32m\]root\[\033[01;32m\]@\[\033[01;32m\]\h'; else echo '\[\033[01;32m\]\u\[\033[01;32m\]@\[\033[01;32m\]\h'; fi)\[\033[0;31m\]]\342\224\200\$(parse_git_branch)\342\224\200[\[\033[0;37m\]\w\[\033[0;31m\]]\n\[\033[0;31m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]\[\e[0;37m\] "
+	PS1="\[\033[0;31m\]\342\224\214\342\224\200\$(returncode)[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;32m\]root\[\033[01;32m\]@\[\033[01;32m\]\h'; else echo '\[\033[01;32m\]\u\[\033[01;32m\]@\[\033[01;32m\]\h'; fi)\[\033[0;31m\]]\342\224\200\$(parse_git_branch)\342\224\200[\[\033[0;37m\]\w\[\033[0;31m\]]\n\[\033[0;31m\]\342\224\224\342\224\200\342\224\200\342\225\274 "
 
 	if [ "`id -u`" -eq 0 ];
 	then
@@ -119,10 +119,16 @@ complete -A directory     cd rmdir
 
 
 #------------------------------------------------------------------------------
-# Colorized ls.
+# Colorized aliases
 #------------------------------------------------------------------------------
-export LS_OPTIONS='--color=auto'
-alias ls='ls $LS_OPTIONS'
+alias ls='ls --color=always'
+alias grep='grep --color=always'
+alias fgrep='fgrep --color=always'
+alias egrep='egrep --color=always'
+alias diff='diff --color=always'
+alias ip='ip --color=always'
+alias dmesg='dmesg --color=always'
+alias less='less -r'
 
 
 #------------------------------------------------------------------------------
