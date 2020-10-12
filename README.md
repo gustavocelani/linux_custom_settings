@@ -23,11 +23,17 @@ Some configuration files run a set of commands upon startup. A common convention
 ## Automatic Configuration Usage
 
 ```
-$ git clone https://github.com/gustavocelani/linux_custom_configuration_files.git
-$ cd ./linux_configuration_files
+$ git clone https://github.com/gustavocelani/linux_custom_settings.git
+$ cd ./linux_custom_settings
 $ chmod +x auto_config.sh
 $ ./auto_config.sh
 ```
 
 ![Alt text](auto_config_usage.png?raw=true "Automatic Configuration Usage")
+
+### Tested on
+
+* Kali Linux 2020.2
+* Kali Linux 2020.3
+
 
