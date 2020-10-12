@@ -86,26 +86,26 @@ print_wolf() {
 }
 
 print_info() {
-    echo -e "${welcome_color}${welcome_msg}"
-    echo -e "${welcome_color}${current_date}"
-    echo -e "${welcome_color}${sys_info}"
+    echo -e " ${welcome_color}${welcome_msg}"
+    echo -e " ${welcome_color}${current_date}"
+    echo -e " ${welcome_color}${sys_info}"
 
     echo -e ""
-    echo -e "${system_status_color}Path...............: ${path}"
-    echo -e "${system_status_color}Uptime.............: ${UPTIME}"
-    echo -e "${system_status_color}Memory.............: ${mem_info}"
-    echo -e "${system_status_color}Load Averages......: ${one}, ${five}, ${fifteen}"
-    echo -e "${system_status_color}Running Processes..: ${running_proccess}"
-    echo -e "${system_status_color}IP Addresses.......: ${ip_info}"
+    echo -e " ${system_status_color}Path...............: ${path}"
+    echo -e " ${system_status_color}Uptime.............: ${UPTIME}"
+    echo -e " ${system_status_color}Memory.............: ${mem_info}"
+    echo -e " ${system_status_color}Load Averages......: ${one}, ${five}, ${fifteen}"
+    echo -e " ${system_status_color}Running Processes..: ${running_proccess}"
+    echo -e " ${system_status_color}IP Addresses.......: ${ip_info}"
 
     echo -e ""
-    echo -e "${warning_color}::::::::::::::: WARNING :::::::::::::::"
-    echo -e "${warning_color}: This is a private system            :"
-    echo -e "${warning_color}: No illegal files or activity        :"
-    echo -e "${warning_color}: Keep the system clean               :"
-    echo -e "${warning_color}: Make regular backups                :"
-    echo -e "${warning_color}: Make regular updates                :"
-    echo -e "${warning_color}:::::::::::::::::::::::::::::::::::::::"
+    echo -e " ${warning_color}::::::::::::::: WARNING :::::::::::::::"
+    echo -e " ${warning_color}: This is a private system            :"
+    echo -e " ${warning_color}: No illegal files or activity        :"
+    echo -e " ${warning_color}: Keep the system clean               :"
+    echo -e " ${warning_color}: Make regular backups                :"
+    echo -e " ${warning_color}: Make regular updates                :"
+    echo -e " ${warning_color}:::::::::::::::::::::::::::::::::::::::"
     echo -e "${default_color}"
 }
 
