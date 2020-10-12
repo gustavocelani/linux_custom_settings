@@ -6,7 +6,8 @@
 #
 #    Description:  Automatic Linux Setup
 #                  - Upgrade
-#                  - Dist-Upgrade
+#                  - Full-Upgrade
+#                  - Install Misc
 #                  - Keyboard
 #                  - Terminator
 #                  - Git
@@ -45,13 +46,23 @@ _initial_setup_() {
 _Upgrade_() {
 
 	_title_ "Upgrade"
-	sudo apt-get -y upgrade
+	sudo apt-get upgrade -y
 }
 
-_Dist_Upgrade_() {
+_Full_Upgrade_() {
 
-	_title_ "Dist-Upgrade"
-	sudo apt-get -y dist-upgrade
+	_title_ "Full-Upgrade"
+	sudo apt-get full-upgrade -y
+}
+
+_Install_Misc_() {
+
+	_title_ "Install MISC"
+	sudo apt-get install -y \
+		dialog \
+		figlet \
+		boxes \
+		htop
 }
 
 _Keyboard_() {
@@ -161,7 +172,8 @@ SETUP_LIST=$( dialog \
 		--checklist "" \
 	0 0 0 \
 	_Upgrade_      "OS Packages Upgrade"                   OFF \
-	_Dist_Upgrade_ "OS Distribution Upgrade"               OFF \
+	_Full_Upgrade_ "Full OS Distribution Upgrade"          OFF \
+	_Install_Misc_ "Install MISC Packages"                 ON  \
 	_Keyboard_     "Portuguese (Brazil) Layout"            ON  \
 	_Terminator_   "Install and configure layout settings" ON  \
 	_Git_          "Install and configure user"            ON  \
