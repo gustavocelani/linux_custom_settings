@@ -90,6 +90,7 @@ _Terminator_() {
 	cp -v ~/.config/terminator/config ~/.config/terminator/config.bkp
 
 	echo -e "\nAttempt to replace terminator config"
+	mkdir -p ~/.config/terminator
 	cp -v ./terminator/config ~/.config/terminator/config
 }
 
