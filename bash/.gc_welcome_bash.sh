@@ -143,6 +143,8 @@ print_wolf_info() {
 # Main Loop
 #
 
+sleep 0.1
+
 if (( $(tput cols) > 105 ))
 then
     print_wolf_info
