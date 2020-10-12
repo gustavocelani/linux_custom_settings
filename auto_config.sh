@@ -29,10 +29,10 @@ _title_() {
 }
 
 _validate_path_() {
-	if [[ "$(pwd)" != *linux_custom_configuration_files ]]
+	if [[ "$(pwd)" != *linux_custom_settings ]]
 	then
-		echo -e "Please, call this script from linux_custom_configuration_files directory..."
-		echo -e "                              --------------------------------\n"
+		echo -e "Please, call this script from linux_custom_settings directory..."
+		echo -e "                              ---------------------\n"
 		exit 1
 	fi
 }
