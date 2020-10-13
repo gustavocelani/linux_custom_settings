@@ -145,7 +145,7 @@ print_wolf_info() {
 
 sleep 0.1
 
-if (( $(tput cols) > 105 ))
+if [ $(tput cols) -gt 105 ]
 then
     print_wolf_info
 else
