@@ -36,4 +36,5 @@ $ ./auto_config.sh
 * Kali Linux 2020.2
 * Kali Linux 2020.3
 * Ubuntu 20.04.1 LTS
+* Ubuntu 18.04.5 LTS
 
