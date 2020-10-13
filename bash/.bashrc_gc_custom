@@ -20,13 +20,13 @@ shopt -s checkwinsize
 #------------------------------------------------------------------------------
 function returncode
 {
-	returncode=$?
-	if [ $returncode != 0 ];
-	then
-		echo "[$returncode]"
-	else
-		echo ""
-	fi
+    returncode=$?
+    if [ $returncode != 0 ];
+    then
+        echo "[$returncode]"
+    else
+        echo ""
+    fi
 }
 
 
@@ -35,12 +35,12 @@ function returncode
 #------------------------------------------------------------------------------
 function parse_git_dirty
 {
-	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
 
 function parse_git_branch
 {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 
 
@@ -64,23 +64,23 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 #------------------------------------------------------------------------------
 if [ "$BASH" ]; then
 
-	# Main PS1 for bash
-	PS1="\[\033[0;31m\]\342\224\214\342\224\200\$(returncode)[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;32m\]root\[\033[01;32m\]@\[\033[01;32m\]\h'; else echo '\[\033[01;32m\]\u\[\033[01;32m\]@\[\033[01;32m\]\h'; fi)\[\033[0;31m\]]\342\224\200\$(parse_git_branch)\342\224\200[\[\033[0;37m\]\w\[\033[0;31m\]]\n\[\033[0;31m\]\342\224\224\342\224\200\342\224\200\342\225\274 "
+    # Main PS1 for bash
+    PS1="\[\033[0;31m\]\342\224\214\342\224\200\$(returncode)[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;32m\]root\[\033[01;32m\]@\[\033[01;32m\]\h'; else echo '\[\033[01;32m\]\u\[\033[01;32m\]@\[\033[01;32m\]\h'; fi)\[\033[0;31m\]]\342\224\200\$(parse_git_branch)\342\224\200[\[\033[0;37m\]\w\[\033[0;31m\]]\n\[\033[0;31m\]\342\224\224\342\224\200\342\224\200\342\225\274 "
 
-	if [ "`id -u`" -eq 0 ];
-	then
-		PS1=${PS1}"#\[\e[0m\] "
-	else
-		PS1=${PS1}"\\$\[\e[0m\] "
-	fi
+    if [ "`id -u`" -eq 0 ];
+    then
+        PS1=${PS1}"#\[\e[0m\] "
+    else
+        PS1=${PS1}"\\$\[\e[0m\] "
+    fi
 
 else
-	if [ "`id -u`" -eq 0 ];
-	then
-		PS1='# '
-	else
-		PS1='$ '
-	fi
+    if [ "`id -u`" -eq 0 ];
+    then
+        PS1='# '
+    else
+        PS1='$ '
+    fi
 fi
 
 export PS1
@@ -195,12 +195,12 @@ export LESS=iR
 #------------------------------------------------------------------------------
 if ! [ $TERM ];
 then
-	eval `tset -s -Q`
-	case $TERM in
-		con*|vt100|linux|xterm)
-			tset -Q -e ^?
-		;;
-	esac
+    eval `tset -s -Q`
+    case $TERM in
+        con*|vt100|linux|xterm)
+            tset -Q -e ^?
+        ;;
+    esac
 fi
 
 
@@ -223,7 +223,7 @@ alias ...='cd ../..'
 #------------------------------------------------------------------------------
 if [ -f ~/.bashrc.local ];
 then
-	. ~/.bashrc.local
+    . ~/.bashrc.local
 fi
 
 
@@ -243,11 +243,11 @@ umask 022
 # Auto Complete
 #------------------------------------------------------------------------------
 if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 
 
@@ -255,11 +255,11 @@ fi
 # If this is an xterm set the title to user@host:dir
 #------------------------------------------------------------------------------
 case "$TERM" in
-	xterm*|rxvt*)
-		PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    	;;
-	*)
-    	;;
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
 esac
 
 
@@ -268,5 +268,5 @@ esac
 #------------------------------------------------------------------------------
 if [[ ! -z "$COLUMNS" ]]
 then
-	~/.gc_welcome_bash.sh
+    ~/.gc_welcome_bash.sh
 fi
