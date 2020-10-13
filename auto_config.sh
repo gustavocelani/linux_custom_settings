@@ -120,7 +120,8 @@ _Bash_() {
 
 	echo -e "\nAttempt to replace .bashrc"
 	cp -v ./bash/.bashrc_gc_custom ~/.bashrc
-	cp -v ./bash/.gc_welcome_bash.sh ~/
+	echo -e "\nAttempt to copy motd script"
+	cp -v ./bash/.bash_gc_motd.sh ~/
 }
 
 _Vim_() {

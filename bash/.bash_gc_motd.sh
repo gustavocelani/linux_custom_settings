@@ -2,9 +2,9 @@
 
 ###############################################################################
 #
-#       Filename:  .gc_welcome_bash.sh
+#       Filename:  .bash_gc_motd.sh
 #
-#    Description:  Custom GC welcome message for bash.
+#    Description:  Custom GC message of the day for bash.
 #
 #        Version:  1.0
 #        Created:  12/10/2020 13:50:27 PM
