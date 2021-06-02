@@ -132,9 +132,9 @@ complete -A directory     cd rmdir
 # Colorized aliases
 #------------------------------------------------------------------------------
 alias ls='ls --color=always'
-alias grep='grep --color=always'
-alias fgrep='fgrep --color=always'
-alias egrep='egrep --color=always'
+#alias grep='grep --color=always'
+#alias fgrep='fgrep --color=always'
+#alias egrep='egrep --color=always'
 alias diff='diff --color=always'
 alias ip='ip --color=always'
 alias dmesg='dmesg --color=always'
